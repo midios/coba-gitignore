@@ -1,0 +1,339 @@
+
+Pada proses git add . adalah yang terjadi memindahkan semua fila apa saja yang terjadi perubahan dari working tree ke stagging area.
+Jika ada file file tertentu yang tidak ingin ikut dipindahkan (misal file rahasia, system, password dll) kita gunakan git ignore
+
+git ignore adalah berisi file file yang di ignore atau diabaikan tidak ikut dipindah saat git add .
+
+Simulasinya sbb:
+1. Masuk ke github Midios
+2. Buat Repositori baru dan beri nama: coba-gitignore (Copy 
+3. Lalu masuk ke Desktop, buat repo lokal (folder local) kita. Lakukan Ritual: git init
+4. Ketik code . (Masuk ke Visual Code kita)
+5. Buat 2 File di repo local (Folder Lokal) index.html dan style.css
+6. Kembali ke github Midios bagian repositori yang baru tadi (coba-gitignore), lakukan copy pada icon nya
+
+Kalau dipaste sbb: 
+git remote add origin https://github.com/midios/coba-gitignore.git
+git branch -M main
+git push -u origin main
+
+7. Atau lihat di listnya, block teksnya dan copy manual (https://github.com/midios/coba-gitignore)
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/midios/coba-gitignore.git
+git branch -M main
+git push -u origin main
+
+8. Menghubungkan repo local ke repo origin/master/ remote repo, caranya masuk ke repo local di Desktop kita yaitu di Gitbash nya di git-ignore. 
+Untuk melakukan remote add dulu sebelum git push
+
+Ketik: git remote add origin https://github.com/midios/coba-gitignore.git
+
+9. Yang terjadi secara default git merubah master jadi main , tampaknya kedepan pemakaian master ini menjadi main. Perhatikan perubahan otomatis di gitBashnya.
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (master)
+$ git remote add origin https://github.com/midios/coba-gitignore.git
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (master)
+$ git branch -M main
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$ git push -u origin main
+
+10. Dibiasakan cek status nya terlebih dahulu sebelum melakukan git push -u origin main (jadi hapus dulu ini, default otomatisnya)
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+        style.css
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$
+
+11. Karena ada untracked file di Working tree area (index.html juga style.css, lakukan add dulu ke stagging area sebelum di Commit pindah ke History Area
+
+12. Lakukan 
+git add .
+
+13. git status (cek kondisinya)
+
+git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   index.html
+        new file:   style.css
+
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$
+
+14. Ketik git commit -m "Menambahkan 2 File baru index.html juga style.css"
+
+git commit -m "Menambahkan 2 File baru index.html juga style.css"
+[main (root-commit) 594be97] Menambahkan 2 File baru index.html juga style.css
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 index.html
+ create mode 100644 style.css
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$
+
+15. Lalu git push sesuai yang di defaultnya: git push -u origin main
+
+git push -u origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 252 bytes | 21.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/midios/coba-gitignore.git
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$
+
+16. Masuk ke github midios, cek reponya, apakah sudah masuk 2 file baru tadi (index.html dan style.css)= sudah
+
+@midios
+midios Menambahkan 2 File baru index.html juga style.css
+594be97
+7 minutes ago
+Git stats
+ 1 commit
+Files
+Type
+Name
+Latest commit message
+Commit time
+
+index.html
+Menambahkan 2 File baru index.html juga style.css
+7 minutes ago
+
+style.css
+Menambahkan 2 File baru index.html juga style.css
+7 minutes ago
+
+17. Mari sekarang memfungsikan git ignore, dengan masuk ke repo local kita /Desktop/coba-gitignore via VSCOde buat 2 File
+config.txt dan script.js
+
+Jadi ada 2 File baru yang untracked files config.txt dan script.js, dimana kita hanya mau mengIgnore config.txt (mengabaikan atau tidak mengajak file tsb ke stagging area).
+
+Caranya sbb:
+Masih di VSCode buat New file .gitignore
+FUngsinya kita mengisikan semua file apa aja menjadi list yang di Ignore atau diAbaikan tidak masuk ke stagging area.
+
+18. Ketik config.txt di list .gitignore dan Save
+19. git add . dan lanjut git status , Lihat dan cek tidak ada config.txt yang dipindahkan ke stagging area oleh git add .
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$ git add .
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   .gitignore
+        new file:   script.js
+
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+
+
+20. Fungsi lebih luas .gitignore, kita bisa memasukkan folder yg diabaikan. Misal didalam repo local coba-gitignore ada folder data, dan semua file exe utk di Ignore atau diabaikan maka bisa diketik di file .gitignore sbb:
+config.txt
+data/
+*.exe
+
+21. git add .
+22. git status , cek sudah ngga ikut folder data, dan file config.txt nya ke stagging area
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$ git add .
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   .gitignore
+        new file:   script.js
+
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$
+
+23. git commit -m "menambahkan list dalam .gitignore"
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$ git commit -m "menambahkan list dalam .gitignore"
+[main 60a725a] menambahkan list dalam .gitignore
+ 2 files changed, 3 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 script.js
+
+24. Lakukan git push tanpa -u, karena push nya ke origin main, karena upstream nya sudah diset di awal ya Guys (No.7-10) dari 
+No. 7 Ritual: 
+git remote add origin https://github.com/midios/coba-gitignore.git
+git branch -M main
+git push -u origin main
+-----
+
+h@DESKTOP-8713CU3 MINGW64 ~/Desktop/coba-gitignore (main)
+$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 335 bytes | 67.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/midios/coba-gitignore.git
+   594be97..60a725a  main -> main
+
+
+25. Sekarang cek di github Midios (https://github.com/midios/coba-gitignore), apakah sudah ada 2 file .gitignore dan script.js
+
+@midios
+midios menambahkan list dalam .gitignore
+60a725a
+8 minutes ago
+Git stats
+ 2 commits
+Files
+Type
+Name
+Latest commit message
+Commit time
+
+.gitignore
+menambahkan list dalam .gitignore
+8 minutes ago
+
+index.html
+Menambahkan 2 File baru index.html juga style.css
+1 hour ago
+
+script.js
+menambahkan list dalam .gitignore
+8 minutes ago
+
+style.css
+Menambahkan 2 File baru index.html juga style.css
+1 hour ago
+
+=======
+Kunjungi www.gitignore.io (Sekarang jadi https://www.toptal.com/developers/gitignore )
+Kita bisa dibuatkan / digenerate kan file file apa saja yang disarankan untuk diIgnore ketika kita menggunakan github. Supaya file file yang tidak perlu di pindah tidak ikut dipindahkan, jadi kerja kita enak.
+Kriterianya bisa berdasarkan: System Operasinya, Editornya, Bahasa Pemrograman yang dipakai apa. Frameworknya apa. 
+Nanti www.gitignore.io akan menggenerate list file2 nya, kita tinggal Copy Paste ke file .gitignore kita dan Save.
+
+
+gitignore.io
+Create useful .gitignore files for your project
+Ketik: 
+
+Windows 
+VisualStudioCode
+Laravel
+
+Press Create
+Hasilnya bisa cek ke: https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,laravel
+Lakukan Blocking, Copy Paste ke file .gitignore kita
+
+Selesai. Contoh lihat .gitignore kita
+
+Hasil Block Copy Paste:
+# Created by https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,laravel
+# Edit at https://www.toptal.com/developers/gitignore?templates=windows,visualstudiocode,laravel
+
+### Laravel ###
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+public_html/storage
+public_html/hot
+
+storage/*.key
+.env
+Homestead.yaml
+Homestead.json
+/.vagrant
+.phpunit.result.cache
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,laravel
+
+
+
+
